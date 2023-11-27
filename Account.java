@@ -2,26 +2,27 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Account {
-    private String pinHash;
+    private int pinHash;
     private long balance;
     // this will stay empty and will be filled when transactions are made
-    List<Bookings> bookings;
-    AccountInfo cardInfo;
+    List<Booking> bookings;
+    AccountInfo accountInfo;
     Person ownerPerson;
 
     public Account(int pin, long balance, AccountInfo cardInfo, Person ownerPerson) {
         //region PIN
         if (pin > 999 && pin < 10000) {
-            this.pinHash = Helpers.getSHA(String.valueOf(pin));
+            this.pinHash = String.valueOf(pin).hashCode();
+            System.out.println(this.pinHash);
         } else {
-            System.err.println("Invalid PIN number");
+            System.err.println("Invalid PIN Code");
         }
         //endregion
         //region Balance
         this.balance = balance;
         //endregion
         //region CardInfo
-        this.cardInfo = cardInfo;
+        this.accountInfo = cardInfo;
         //endregion
         //region OwnerPerson
         this.ownerPerson = ownerPerson;
@@ -35,7 +36,8 @@ public class Account {
      * @return true if the PIN is valid, false otherwise.
      */
     public boolean validatePin(int pin) {
-        return Helpers.getSHA(String.valueOf(pin)) == this.pinHash;
+        System.out.println(Helpers.getSHA(String.valueOf(pin)));
+        return String.valueOf(pin).hashCode() == this.pinHash;
     }
     /**
      * Authenticates the user by requesting a PIN and validating it.
@@ -56,6 +58,7 @@ public class Account {
      */
     public void deposit(long amount) {
         this.balance += amount;
+        bookings.add(new Booking(new java.sql.Date(System.currentTimeMillis()), amount));
     }
     /**
      * Withdraws the specified amount from the account balance.
@@ -68,6 +71,7 @@ public class Account {
             return;
         }
         this.balance -= amount;
+        bookings.add(new Booking(new java.sql.Date(System.currentTimeMillis()), -amount));
     }
     /**
      * Transfers a specified amount from this account to the target account.
@@ -80,8 +84,32 @@ public class Account {
             System.err.println("Invalid PIN");
             return;
         }
-        this.balance -= amount;
+        this.withdraw(amount);
         targetAccount.deposit(amount);
     }
+    /**
+     * Returns the balance of the account.
+     * 
+     * @return the balance of the account
+     */
+    public long getBalance() {
+        return this.balance;
+}
 
+    public boolean closeAccount(AccountInfo _accountInfo, Person _ownerPerson) {
+        if (!authenticate()) {
+            System.err.println("Invalid PIN");
+            return false;
+        }
+        if (!this.accountInfo.is(_accountInfo)) {
+            System.err.println("Invalid AccountInfo");
+            return false;
+        }
+        if (!this.ownerPerson.is(_ownerPerson)) {
+            System.err.println("Invalid OwnerPerson");
+            return false;
+        }
+        this.withdraw(this.balance);
+        return true;
+    }
 }

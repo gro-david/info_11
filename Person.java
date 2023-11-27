@@ -19,4 +19,7 @@ public class Person {
         this.dateOfBirth = dateOfBirth;
         this.phoneNumber = phoneNumber;
     }
+    public boolean is(Person _person){
+        return this.name.equals(_person.name) && this.dateOfBirth.equals(_person.dateOfBirth) && this.phoneNumber == _person.phoneNumber;
+    }
 }

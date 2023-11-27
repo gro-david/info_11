@@ -6,7 +6,7 @@ import java.sql.Date;
 /**
  * Represents a booking with a specific date and transaction.
  */
-public class Bookings {
+public class Booking {
     final Date date;
     final long transaction;
 
@@ -16,7 +16,7 @@ public class Bookings {
      * @param date        the date of the booking
      * @param transaction the transaction amount
      */
-    public Bookings(Date date, long transaction) {
+    public Booking(Date date, long transaction) {
         this.date = date;
         this.transaction = transaction;
     }

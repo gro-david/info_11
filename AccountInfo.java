@@ -31,4 +31,7 @@ public class AccountInfo {
         this.dateCreated = dateCreated;
         this.expiryDate = expiryDate;
     }
+    public boolean is(AccountInfo _accountInfo){
+        return this.bankName.equals(_accountInfo.bankName) && this.countryCode.equals(_accountInfo.countryCode) && this.IBAN == _accountInfo.IBAN && this.dateCreated.equals(_accountInfo.dateCreated) && this.expiryDate.equals(_accountInfo.expiryDate);
+    }
 }

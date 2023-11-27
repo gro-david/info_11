@@ -15,7 +15,9 @@ public final class Helpers {
     public static String getSHA(String input) {
         try {
             MessageDigest md = MessageDigest.getInstance("SHA-256");
-            return String.valueOf(md.digest(input.getBytes(StandardCharsets.UTF_8)));
+            var output = String.valueOf(md.digest(input.getBytes(StandardCharsets.UTF_8)));
+            md.reset();
+            return output;
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
             return null;
