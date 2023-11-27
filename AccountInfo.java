@@ -13,8 +13,8 @@ public class AccountInfo {
     final String bankName;
     final Locale countryCode;
     final long IBAN;
-    private final Date dateCreated;
-    private Date expiryDate;
+    final Date dateCreated;
+    Date expiryDate;
     
     /**
      * Constructs an AccountInfo object with the specified bank name, country code, date created, and expiry date.
