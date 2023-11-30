@@ -1,7 +1,7 @@
 /*
  * Instances of this class will be stored in the Cards for saving the bookings
  */
-import java.sql.Date;
+import java.util.Date;
 
 /**
  * Represents a booking with a specific date and transaction.

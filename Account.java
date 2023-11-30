@@ -13,7 +13,6 @@ public class Account {
         //region PIN
         if (pin > 999 && pin < 10000) {
             this.pinHash = String.valueOf(pin).hashCode();
-            System.out.println(this.pinHash);
         } else {
             System.err.println("Invalid PIN Code");
         }
@@ -27,6 +26,7 @@ public class Account {
         //region OwnerPerson
         this.ownerPerson = ownerPerson;
         //endregion
+        this.bookings = new java.util.ArrayList<>();
     }
 
     /**
@@ -36,7 +36,6 @@ public class Account {
      * @return true if the PIN is valid, false otherwise.
      */
     public boolean validatePin(int pin) {
-        System.out.println(Helpers.getSHA(String.valueOf(pin)));
         return String.valueOf(pin).hashCode() == this.pinHash;
     }
     /**
@@ -58,7 +57,7 @@ public class Account {
      */
     public void deposit(long amount) {
         this.balance += amount;
-        bookings.add(new Booking(new java.sql.Date(System.currentTimeMillis()), amount));
+        bookings.add(new Booking(new java.util.Date(System.currentTimeMillis()), amount));
     }
     /**
      * Withdraws the specified amount from the account balance.
@@ -94,7 +93,7 @@ public class Account {
      */
     public long getBalance() {
         return this.balance;
-}
+    }
 
     public boolean closeAccount(AccountInfo _accountInfo, Person _ownerPerson) {
         if (!authenticate()) {

@@ -2,7 +2,7 @@
  * This stores info about a card like country code IBAN and bank name
  */
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.Locale;
 
 /**
@@ -32,6 +32,6 @@ public class AccountInfo {
         this.expiryDate = expiryDate;
     }
     public boolean is(AccountInfo _accountInfo){
-        return this.bankName.equals(_accountInfo.bankName) && this.countryCode.equals(_accountInfo.countryCode) && this.IBAN == _accountInfo.IBAN && this.dateCreated.equals(_accountInfo.dateCreated) && this.expiryDate.equals(_accountInfo.expiryDate);
+        return this.bankName == _accountInfo.bankName && this.countryCode == _accountInfo.countryCode && this.IBAN == _accountInfo.IBAN && this.dateCreated == _accountInfo.dateCreated && this.expiryDate == _accountInfo.expiryDate;
     }
 }

@@ -1,4 +1,4 @@
-import java.sql.Date;
+import java.util.Date;
 
 /**
  * Represents a person with a name, date of birth, and phone number.
@@ -6,17 +6,17 @@ import java.sql.Date;
 public class Person {
     String name;
     Date dateOfBirth;
-    int phoneNumber;
+    long phoneNumber;
 
     /**
      * Constructs a Person object with the specified name, date of birth, and phone number.
      * @param name the name of the person
-     * @param dateOfBirth the date of birth of the person
+     * @param date the date of birth of the person
      * @param phoneNumber the phone number of the person
      */
-    public Person(String name, Date dateOfBirth, int phoneNumber) {
+    public Person(String name, java.util.Date date, long phoneNumber) {
         this.name = name;
-        this.dateOfBirth = dateOfBirth;
+        this.dateOfBirth = date;
         this.phoneNumber = phoneNumber;
     }
     public boolean is(Person _person){
