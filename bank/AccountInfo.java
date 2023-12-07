@@ -1,3 +1,4 @@
+package bank;
 /*
  * This stores info about a card like country code IBAN and bank name
  */

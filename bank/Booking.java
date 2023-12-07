@@ -1,3 +1,4 @@
+package bank;
 /*
  * Instances of this class will be stored in the Cards for saving the bookings
  */
